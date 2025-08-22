@@ -1,26 +1,7 @@
-{
+﻿{
   "manifest_version": 3,
-  "name": "eBay Gross Calc",
+  "name": "eBay Gross Calculator",
   "version": "0.1.0",
   "description": "Local-first overlay for eBay Seller Hub KPIs.",
-  "permissions": ["storage"],
-  "host_permissions": [
-  "*://*.ebay.com/*",
-  "*://*.ebay.co.uk/*",
-  "*://*.ebay.ca/*",
-  "*://*.ebay.com.au/*"
-],
-"content_scripts": [
-  {
-    "matches": [
-      "*://*.ebay.com/*",
-      "*://*.ebay.co.uk/*",
-      "*://*.ebay.ca/*",
-      "*://*.ebay.com.au/*"
-    ],
-    "js": ["content/content.js"],
-    "run_at": "document_idle"
-  }
-],
-  "action": { "default_title": "eBay Gross Calc" }
+  ...
 }
