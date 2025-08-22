@@ -1,0 +1,22 @@
+// src/content/content.ts (top)
+// src/popup/popup.ts (top)
+// src/options/options.ts (top)
+/// <reference types="chrome" />
+// src/workers/background.ts (top)
+// src/workers/calcWorker.ts (top)
+/// <reference lib="webworker" />
+/// <reference types="chrome" />
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "WebWorker"],
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["chrome-types"]
+  },
+  "include": ["src"]
+}
+

@@ -1,0 +1,54 @@
+<!-- src/options/index.html (replace whole file) -->
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>Gross Calc Settings</title>
+    <link rel="stylesheet" href="options.css" />
+    <style>
+      body { font-family: system-ui, sans-serif; margin:16px }
+      label { display:block; margin:8px 0 }
+      input[type=number]{ width:120px }
+      table{ border-collapse:collapse; margin-top:12px; width:100% }
+      th,td{ border:1px solid #ddd; padding:6px; text-align:left; font-size:12px }
+      th{ background:#f3f3f3 }
+      .row{ display:flex; gap:12px; flex-wrap:wrap; align-items:end }
+      .row > label{ margin:0 }
+      button{ padding:6px 10px }
+    </style>
+  </head>
+  <body>
+    <h1>Settings</h1>
+
+    <h2>Goals</h2>
+    <label>Weekly sales goal $ <input id="weeklyGoal" type="number" min="0" step="1" /></label>
+    <label>Daily listing goal $ <input id="listingGoalDaily" type="number" min="0" step="1" /></label>
+    <button id="saveGoals">Save goals</button> <span id="status"></span>
+
+    <h2 style="margin-top:20px">Manual Orders</h2>
+    <div class="row">
+      <label>Gross $ <input id="o_gross" type="number" min="0" step="0.01" /></label>
+      <label>Item price $ <input id="o_itemPrice" type="number" min="0" step="0.01" /></label>
+      <label>Shipping cost $ <input id="o_ship" type="number" min="0" step="0.01" /></label>
+      <label>COGS $ <input id="o_cogs" type="number" min="0" step="0.01" /></label>
+      <label>Fees $ <input id="o_fees" type="number" min="0" step="0.01" /></label>
+      <label>Ads $ <input id="o_ads" type="number" min="0" step="0.01" /></label>
+      <label>Refunds $ <input id="o_refunds" type="number" min="0" step="0.01" /></label>
+      <button id="addOrder">Add order</button>
+    </div>
+
+    <div style="margin-top:10px">
+      <button id="clearOrders">Clear all orders</button>
+      <button id="exportOrders">Export JSON</button>
+    </div>
+
+    <table id="ordersTable">
+      <thead>
+        <tr>
+          <th>#</th><th>Gross</th><th>Item</th><th>Ship</th><th>COGS</th><th>Fees</th><th>Ads</th><th>Refunds</th><th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

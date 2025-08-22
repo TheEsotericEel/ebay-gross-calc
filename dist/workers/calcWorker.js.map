@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/workers/calcWorker.ts"],
+  "sourcesContent": ["\uFEFF/// <reference types=\"chrome-types\" />\r\n/// <reference lib=\"webworker\" />\r\n// src/workers/calcWorker.ts\r\nexport type CalcInput = { orders: Array<{ gross: number; fees: number; shipping: number; cogs: number }> };\r\nexport type CalcOutput = { gross: number; net: number };\r\n\r\nself.onmessage = (e: MessageEvent<CalcInput>) => {\r\n  const { orders } = e.data;\r\n  const gross = orders.reduce((s, o) => s + o.gross, 0);\r\n  const net = orders.reduce((s, o) => s + (o.gross - o.fees - o.shipping - o.cogs), 0);\r\n  (self as unknown as Worker).postMessage({ gross, net } as CalcOutput);\r\n};\r\n\r\n"],
+  "mappings": ";AAMA,KAAK,YAAY,CAAC,MAA+B;AAC/C,QAAM,EAAE,OAAO,IAAI,EAAE;AACrB,QAAM,QAAQ,OAAO,OAAO,CAAC,GAAG,MAAM,IAAI,EAAE,OAAO,CAAC;AACpD,QAAM,MAAM,OAAO,OAAO,CAAC,GAAG,MAAM,KAAK,EAAE,QAAQ,EAAE,OAAO,EAAE,WAAW,EAAE,OAAO,CAAC;AACnF,EAAC,KAA2B,YAAY,EAAE,OAAO,IAAI,CAAe;AACtE;",
+  "names": []
+}

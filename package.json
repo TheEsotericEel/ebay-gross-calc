@@ -1,0 +1,17 @@
+{
+  "name": "ebay-gross-calc",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build -- --watch",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "chrome-types": "^0.1.372",
+    "esbuild": "^0.25.9",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.2"
+  }
+}

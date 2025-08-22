@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/workers/background.ts"],
+  "sourcesContent": ["\uFEFF// src/workers/background.ts  (replace whole file)\r\n/// <reference lib=\"webworker\" />\r\n/// <reference types=\"chrome-types\" />\r\nchrome.runtime.onInstalled.addListener(() => {\r\n  chrome.storage.local.set({ listedToday: 0 });\r\n});\r\n\r\nchrome.alarms?.create?.(\"rollup\", { periodInMinutes: 15 });\r\nchrome.alarms?.onAlarm.addListener(async (a: chrome.alarms.Alarm) => {\r\n  if (a.name !== \"rollup\") return;\r\n  // placeholder for future sync/pipeline math\r\n});\r\n\r\n"],
+  "mappings": ";AAGA,OAAO,QAAQ,YAAY,YAAY,MAAM;AAC3C,SAAO,QAAQ,MAAM,IAAI,EAAE,aAAa,EAAE,CAAC;AAC7C,CAAC;AAED,OAAO,QAAQ,SAAS,UAAU,EAAE,iBAAiB,GAAG,CAAC;AACzD,OAAO,QAAQ,QAAQ,YAAY,OAAO,MAA2B;AACnE,MAAI,EAAE,SAAS,SAAU;AAE3B,CAAC;",
+  "names": []
+}
