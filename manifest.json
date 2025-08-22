@@ -1,14 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "eBay Gross Calc",
+  "name": "eBay Gross Calculator",
   "version": "0.1.0",
   "description": "Local-first overlay for eBay Seller Hub KPIs.",
-  "permissions": ["storage"],
+  "permissions": ["storage", "identity", "alarms"],
   "host_permissions": [
   "*://*.ebay.com/*",
   "*://*.ebay.co.uk/*",
   "*://*.ebay.ca/*",
-  "*://*.ebay.com.au/*"
+  "*://*.ebay.com.au/*",
+  "https://ebay-gross-calc.onrender.com*"
 ],
 "content_scripts": [
   {
