@@ -1,10 +1,8 @@
-ï»¿/// <reference types="chrome"/>
+/// <reference lib="dom" />
+/// <reference types="chrome"/>
 
 (() => {
-  if ((window as any).__EGC_LOADED__) {
-    console.log("[EGC] already loaded");
-    return;
-  }
+  if ((window as any).__EGC_LOADED__) { return; }
   (window as any).__EGC_LOADED__ = true;
 
   function estimateFees(o: { itemPrice?: number; gross?: number }, feeRate = 0.13, procRate = 0.029, procFixed = 0.3) {
@@ -18,14 +16,7 @@
     listingGoalDaily: number,
     listedToday: number
   ) {
-    let units = orders.length,
-      gross = 0,
-      fees = 0,
-      ads = 0,
-      shippingCost = 0,
-      cogs = 0,
-      refunds = 0;
-
+    let units = orders.length, gross = 0, fees = 0, ads = 0, shippingCost = 0, cogs = 0, refunds = 0;
     for (const o of orders) {
       gross += o.gross || 0;
       fees += o.fees ?? estimateFees(o);
@@ -34,25 +25,22 @@
       cogs += o.cogs ?? 0;
       refunds += o.refunds ?? 0;
     }
-
     const net = gross - fees - ads - shippingCost - cogs - refunds;
     const asp = units ? gross / units : 0;
     const marginPct = gross ? net / gross : 0;
     const progressWeekly = weeklySalesGoal > 0 ? Math.min(1, gross / weeklySalesGoal) : 0;
     const pipelineProgress = listingGoalDaily > 0 ? Math.min(1, listedToday / listingGoalDaily) : 0;
-
     return { units, gross, net, asp, marginPct, progressWeekly, pipelineProgress };
   }
 
   let onChange: ((changes: { [key: string]: chrome.storage.StorageChange }, area: string) => void) | null = null;
-function attachStorageListener(renderFn: () => void) {
-  if (onChange) (chrome.storage.onChanged as any).removeListener(onChange);
-  onChange = () => renderFn();
-  (chrome.storage.onChanged as any).addListener(onChange);
-}
+  function attachStorageListener(renderFn: () => void) {
+    if (onChange) (chrome.storage.onChanged as any).removeListener(onChange);
+    onChange = () => renderFn();
+    (chrome.storage.onChanged as any).addListener(onChange);
+  }
 
   if (document.getElementById("egc-root")) return;
-  console.log("[EGC] overlay init");
 
   const host = document.createElement("div");
   host.id = "egc-root";
@@ -82,7 +70,7 @@ function attachStorageListener(renderFn: () => void) {
   wrap.innerHTML = `
     <div class="hdr">
       <div class="title">eBay Gross Calc</div>
-      <div style="margin-left:auto"><button id="minBtn" title="Collapse">â€“</button></div>
+      <div style="margin-left:auto"><button id="minBtn" title="Collapse">–</button></div>
     </div>
     <div class="sec" id="bodySec">
       <details open>
@@ -132,7 +120,7 @@ function attachStorageListener(renderFn: () => void) {
       const body = $("#bodySec")!;
       const btn = $("#minBtn") as HTMLButtonElement;
       const hidden = body.hasAttribute("hidden");
-      if (hidden) { body.removeAttribute("hidden"); btn.textContent = "â€“"; }
+      if (hidden) { body.removeAttribute("hidden"); btn.textContent = "–"; }
       else { body.setAttribute("hidden", ""); btn.textContent = "+"; }
     });
   }
@@ -162,11 +150,11 @@ function attachStorageListener(renderFn: () => void) {
     setTxt("k_week", `${(k.progressWeekly * 100).toFixed(0)}%`);
     setTxt("k_pipe", `${(k.pipelineProgress * 100).toFixed(0)}%`);
 
-    setTxt("g_weekly", `$${weeklyGoal}`);
-    setTxt("g_daily", `$${listingGoalDaily}`);
-
     const inp = $("#listedToday") as HTMLInputElement | null;
     if (inp) inp.value = String(listedToday || 0);
+
+    const gw = $("#g_weekly"); if (gw) gw.textContent = `$${weeklyGoal}`;
+    const gd = $("#g_daily"); if (gd) gd.textContent = `$${listingGoalDaily}`;
   }
 
   attachStorageListener(render);
