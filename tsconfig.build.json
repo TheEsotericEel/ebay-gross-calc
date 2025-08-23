@@ -1,0 +1,1 @@
+﻿{ "compilerOptions": { "target":"ES2022","module":"ES2022","moduleResolution":"Bundler","rootDir":".","outDir":"dist","allowJs":true,"checkJs":false,"skipLibCheck":true,"types":["chrome"] }, "include":["src/**/*","content/**/*"] }

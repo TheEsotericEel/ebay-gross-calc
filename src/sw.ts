@@ -1,7 +1,7 @@
 // src/sw.ts
 /// <reference types="chrome"/>
 
-import { fetchRecentOrders, fetchTransactions } from "./ebay";
+import { fetchRecentOrders, fetchTransactions } from "./ebay.js";
 
 chrome.runtime.onInstalled.addListener((_details: chrome.runtime.InstalledDetails) => {
   // no-op
@@ -38,7 +38,7 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
-chrome.alarms.onAlarm.addListener(async (a: chrome.alarms.Alarm) => {
+(chrome.alarms.onAlarm as any).addListener(async (a: chrome.alarms.Alarm) => {
   if (a.name === "ebay_refresh") {
     const { refreshIfNeeded, scheduleRefresh } = await import("./ebayAuth.js");
     try {
